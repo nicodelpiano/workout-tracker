@@ -9,6 +9,7 @@ datasource db {
 
 model Example {
   id String @id @default(cuid())
+  text String
 }
 
 model Account {
