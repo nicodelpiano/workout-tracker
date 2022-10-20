@@ -25,3 +25,5 @@ const AuthShowcase: React.FC = () => {
     </div>
   );
 };
+
+export default AuthShowcase;
