@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
+import AuthShowcase from "./components/AuthShowcase";
 
 const Home: NextPage = () => {
   const { data, isLoading } = trpc.example.hello.useQuery({
