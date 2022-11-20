@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          <span className="text-purple-300">Workout</span> Tracker
+          <span className="text-purple-300">Workout</span> 🏋️ Tracker
         </h1>
         <div className="flex w-full items-center justify-center pt-6 text-2xl text-blue-500">
           {isLoading ? <p>Loading..</p> : <p>{data?.greeting}</p>}

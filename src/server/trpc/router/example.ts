@@ -1,15 +1,15 @@
-import { t } from "../trpc";
+import { publicProcedure, t } from "../trpc";
 import { z } from "zod";
 
 export const exampleRouter = t.router({
-  hello: t.procedure
+  hello: publicProcedure
     .input(z.object({ text: z.string().nullish() }).nullish())
     .query(({ input }) => {
       return {
         greeting: `Hello ${input?.text ?? "world"}`,
       };
     }),
-  getAll: t.procedure.query(({ ctx }) => {
+  getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.example.findMany();
   }),
 });

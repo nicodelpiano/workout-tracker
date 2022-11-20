@@ -9,7 +9,7 @@ export const t = initTRPC.context<Context>().create({
   },
 });
 
-export const authedProcedure = t.procedure.use(({ ctx, next }) => {
+const isAuthed = t.middleware(({ next, ctx }) => {
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -21,3 +21,13 @@ export const authedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   });
 });
+
+/**
+ * Unprotected procedure
+ **/
+export const publicProcedure = t.procedure;
+
+/**
+ * Protected procedure
+ **/
+export const protectedProcedure = t.procedure.use(isAuthed);
