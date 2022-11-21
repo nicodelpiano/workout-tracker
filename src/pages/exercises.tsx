@@ -11,7 +11,7 @@ function Form() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: ExerciseInput) => {
     console.log(data);
     mutate(data);
   };
@@ -167,6 +167,7 @@ export default ExercisesPage;
 import { Listbox, Transition } from "@headlessui/react";
 import { useState } from "react";
 import { trpc } from "../utils/trpc";
+import { ExerciseInput } from "../server/trpc/router/exercise";
 
 type People = {
   name: string;
