@@ -5,7 +5,11 @@ import { useForm } from "react-hook-form";
 function Form() {
   const { register, handleSubmit } = useForm();
 
-  const { mutate, error } = trpc.exercise.create.useMutation();
+  const { mutate, error } = trpc.exercise.create.useMutation({
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const onSubmit = (data) => {
     console.log(data);
@@ -34,6 +38,7 @@ function Form() {
           >
             Muscle
           </label>
+          {/* <Example {...register("muscle")} /> */}
           <select
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             {...register("muscle")}
@@ -57,6 +62,25 @@ function Form() {
             <option value="beginner">Beginner</option>
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <div>
+          <label
+            htmlFor="exercise_type"
+            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Type
+          </label>
+          <select
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            {...register("exerciseType")}
+          >
+            <option value="cardio">Cardio</option>
+            <option value="plyometrics">Plyometrics</option>
+            <option value="powerlifting">Powerlifting</option>
+            <option value="strength">Strength</option>
+            <option value="stretching">Stretching</option>
+            <option value="strongman">Strongman</option>
           </select>
         </div>
       </div>
@@ -158,7 +182,7 @@ const people: People[] = [
   { id: 6, name: "Hellen Schmidt" },
 ];
 
-export function Example() {
+export function Example({ props }) {
   const [selected, setSelected] = useState<People[]>([]);
 
   const selectedClassName =

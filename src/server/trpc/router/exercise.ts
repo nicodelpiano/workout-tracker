@@ -7,9 +7,9 @@ export const exerciseRouter = t.router({
       z.object({
         name: z.string(),
         level: z.string(),
-        // muscle: z.array(z.string()).optional(),
-        exerciseType: z.array(z.string()).optional(),
-        equipment: z.array(z.string()).optional(),
+        muscle: z.string(),
+        exerciseType: z.string(),
+        equipment: z.string().optional(),
       })
     )
     .mutation(({ input, ctx }) => {
