@@ -4,6 +4,13 @@ import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
 import type { AppType } from "next/app";
 import { trpc } from "../utils/trpc";
+import React from "react";
+
+const GlobalStyles: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  return <div className="bg-cyan-800">{children}</div>;
+};
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -11,7 +18,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <GlobalStyles>
+        <Component {...pageProps} />
+      </GlobalStyles>
     </SessionProvider>
   );
 };

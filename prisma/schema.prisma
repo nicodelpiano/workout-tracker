@@ -27,6 +27,9 @@ model Account {
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
   @@unique([provider, providerAccountId])
 }
 
@@ -36,6 +39,9 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model User {
@@ -46,6 +52,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model VerificationToken {
@@ -53,5 +62,21 @@ model VerificationToken {
   token      String   @unique
   expires    DateTime
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
   @@unique([identifier, token])
+}
+
+model Exercise {
+  id String @id @default(cuid())
+
+  name String @unique
+  muscle String[]
+  exerciseType String[]
+  equipment String[]
+  level String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
