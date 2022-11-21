@@ -1,19 +1,19 @@
 import { NextPage } from "next";
 import { Fragment } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 function Form() {
   const { register, handleSubmit } = useForm();
 
-  const { mutate, error } = trpc.exercise.create.useMutation({
+  const { mutate } = trpc.exercise.create.useMutation({
     onError: (error) => {
       console.log(error);
     },
   });
 
-  const onSubmit = (data: ExerciseInput) => {
+  const onSubmit = (data: FieldValues) => {
     console.log(data);
-    mutate(data);
+    mutate(data as ExerciseInput);
   };
 
   return (
@@ -110,7 +110,7 @@ const ExercisesPage: NextPage = () => {
           action="/exercises"
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(e.target.exercise_name.value);
+            // console.log(e.target.exercise_name.value);
           }}
         >
           <div className="mb-6 grid gap-6 md:grid-cols-2">
@@ -146,7 +146,7 @@ const ExercisesPage: NextPage = () => {
               >
                 Muscle
               </label>
-              <Example />
+              {/* <Example /> */}
             </div>
           </div>
 
@@ -183,7 +183,7 @@ const people: People[] = [
   { id: 6, name: "Hellen Schmidt" },
 ];
 
-export function Example({ props }) {
+export function Example() {
   const [selected, setSelected] = useState<People[]>([]);
 
   const selectedClassName =
